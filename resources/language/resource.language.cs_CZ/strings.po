@@ -1,0 +1,110 @@
+# Kodi Media Center language file
+# Addon Name: Dokumenty.tv
+# Addon id: plugin.video.dokumenty.tv
+# Addon Provider: cache
+msgid ""
+msgstr ""
+
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: cs\n"
+
+msgctxt "#30000"
+msgid "Dokumenty.tv"
+msgstr "Dokumenty.tv"
+
+msgctxt "#30001"
+msgid "Search"
+msgstr "Vyhledávání"
+
+msgctxt "#30002"
+msgid "Documents"
+msgstr "Dokumenty"
+
+msgctxt "#30003"
+msgid "previous page"
+msgstr "předchozí stránka"
+
+msgctxt "#30004"
+msgid "next page"
+msgstr "následující stránka"
+
+msgctxt "#30005"
+msgid "Sorry, can't resolve url.."
+msgstr "Nedokážu najít rozpoznatelnou url .."
+
+msgctxt "#30200"
+msgid "Categories"
+msgstr "Kategorie"
+
+msgctxt "#30201"
+msgid "All"
+msgstr "Všechno"
+
+msgctxt "#30202"
+msgid "Historical"
+msgstr "Historické"
+
+msgctxt "#30203"
+msgid "Catastrophic"
+msgstr "Katastrofické"
+
+msgctxt "#30204"
+msgid "Conspiracy"
+msgstr "Konšpirační"
+
+msgctxt "#30205"
+msgid "Crime"
+msgstr "Krimi"
+
+msgctxt "#30206"
+msgid "Thinking"
+msgstr "Myšlení"
+
+msgctxt "#30207"
+msgid "Nature"
+msgstr "Příroda"
+
+msgctxt "#30208"
+msgid "Technology"
+msgstr "Technika"
+
+msgctxt "#30209"
+msgid "Space"
+msgstr "Vesmír"
+
+msgctxt "#30210"
+msgid "Mysterious"
+msgstr "Záhady"
+
+msgctxt "#30211"
+msgid "Lifestyle"
+msgstr "Životní styl"
+
+msgctxt "#30300"
+msgid "Order"
+msgstr "Pořadí"
+
+msgctxt "#30301"
+msgid "By date"
+msgstr "Podle data"
+
+msgctxt "#30302"
+msgid "By title"
+msgstr "Podle názvu"
+
+msgctxt "#30303"
+msgid "By views"
+msgstr "Podle vidění"
+
+msgctxt "#30304"
+msgid "By likes"
+msgstr "Podle 'líbí'"
+
+msgctxt "#30305"
+msgid "By comments"
+msgstr "Podle komentářů"
+
+msgctxt "#30306"
+msgid "Random"
+msgstr "Náhodně"
+
