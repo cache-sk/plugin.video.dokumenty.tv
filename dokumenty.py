@@ -209,16 +209,20 @@ def manual_resolve(html):
     return ''
 
 def resolve(url):
+    xbmc.log('Resolving: '+url,level=xbmc.LOGNOTICE)
     resolved = False
     try:
         resolved = resolveurl.resolve(url)
     except Exception as e:
         xbmc.log(str(e),level=xbmc.LOGNOTICE)
+    
+    if resolved == False:
         try:
             resolved = urlresolver.resolve(url)
         except Exception as e:
             xbmc.log(str(e),level=xbmc.LOGNOTICE)
-            resolved = False
+    
+    xbmc.log('Resolved: '+str(resolved),level=xbmc.LOGNOTICE)
     return resolved
 
 def play(href):
@@ -248,9 +252,8 @@ def play(href):
     if url == '' or url == False:
         #yet another try
         url = manual_resolve(html)
-
-    if url != '':
-        url = resolve(url)
+        if url != '':
+            url = resolve(url)
 
     if url == '' or url == False:
         xbmcgui.Dialog().ok(_addon.getAddonInfo('name'), _addon.getLocalizedString(30005))
