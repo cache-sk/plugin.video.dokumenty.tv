@@ -169,6 +169,10 @@ def list_search(query, order, page = 1):
         html = BeautifulSoup(data_text, 'html.parser')
         posts = html.find_all('div', {'id' : re.compile('post-[0-9]*')}, True)
 
+        if len(posts) == 1 and posts[0]['id'] == 'post-0':
+            xbmcplugin.endOfDirectory(_handle, updateListing=page > 1)
+            return
+
         if page > 1:
             less = get_url(action='search', query=query, order=order, page=page-1)
         else:
