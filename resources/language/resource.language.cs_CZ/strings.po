@@ -29,8 +29,16 @@ msgid "next page"
 msgstr "následující stránka"
 
 msgctxt "#30005"
-msgid "Sorry, can't resolve url.."
-msgstr "Nedokážu najít rozpoznatelnou url .."
+msgid "Sorry, can't find any recognizable url."
+msgstr "Nedokážu najít rozpoznatelnou url."
+
+msgctxt "#30006"
+msgid "Sorry, can't resolve url to playable video."
+msgstr "Nedokážu přeložit url a přehrát video."
+
+msgctxt "#30007"
+msgid "Choose file host server.."
+msgstr "Vyberte si file host server.."
 
 msgctxt "#30200"
 msgid "Categories"

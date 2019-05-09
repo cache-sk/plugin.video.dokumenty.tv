@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.dokumenty.tv" version="0.0.1" name="Dokumenty.tv" provider-name="cache">
+<addon id="plugin.video.dokumenty.tv" version="0.0.2" name="Dokumenty.tv" provider-name="cache">
     <requires>
         <import addon="xbmc.python" version="2.19.0" />
         <import addon="script.module.resolveurl" version="5.0.00"/>
@@ -16,7 +16,10 @@
         <description lang="sk">prototyp</description>
         <description lang="cs">prototyp</description>
         <news>
+[B]0.0.2[/B]
+- beta, plot, better searching
 [B]0.0.1[/B]
+- alpha
         </news>
         <assets>
             <icon>icon.png</icon>

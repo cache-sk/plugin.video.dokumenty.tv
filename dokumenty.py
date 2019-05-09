@@ -95,13 +95,20 @@ def list_posts(posts, less, more):
         xbmcplugin.addDirectoryItem(_handle, link, list_item, is_folder)
 
     for post in posts:
+        #TODO - catch non existing elements, or multiple elements?
         img = post.select('img')[0]['src']
         title_block = post.select('h2')[0]
         title_link = title_block.select('a')[0]
         href = title_link['href']
         name = title_link.string
+        summary = post.find_all('p', {'class' : 'entry-summary'}, True)
+        if len(summary) > 0:
+            summary = summary[0].string.strip()
+            summary = " ".join(summary.split()) #strip inner whitespaces
+        else:
+            summary = ''
         list_item = xbmcgui.ListItem(label=name)
-        list_item.setInfo('video', {'title': name})
+        list_item.setInfo('video', {'title': name, 'plot': summary})
         list_item.setArt({'thumb': img})
         list_item.setProperty('IsPlayable', 'true')
         link = get_url(action='play', href=href)
@@ -122,15 +129,16 @@ def list_items(category, order, page = 1):
     xbmcplugin.setPluginCategory(_handle, _addon.getLocalizedString(30002))
     data_url = BASE + category + ('page/' + str(page) + '/' if page > 1 else '') + '?' + SORT + order
     data_raw = _session.get(data_url, headers=HEADERS)
-    html = BeautifulSoup(data_raw.text, 'html.parser')
-    posts = html.find_all('div', {'id' : re.compile('post-[0-9]*')})
+    data_text = data_raw.text.replace('</time></a>','</time>') #bullshit
+    html = BeautifulSoup(data_text, 'html.parser')
+    posts = html.find_all('div', {'id' : re.compile('post-[0-9]*')}, True)
 
     if page > 1:
         less = get_url(action='items', category=category, order=order, page=page-1)
     else:
         less = None
 
-    nextpostslink = html.find_all('a', {'class' : 'nextpostslink', 'rel':'next'})
+    nextpostslink = html.find_all('a', {'class' : 'nextpostslink', 'rel':'next'}, True)
 
     if len(nextpostslink) > 0:
         more = get_url(action='items', category=category, order=order, page=page+1)
@@ -157,15 +165,16 @@ def list_search(query, order, page = 1):
         xbmcplugin.setPluginCategory(_handle, _addon.getLocalizedString(30002))
         data_url = BASE + ('page/' + str(page) + '/' if page > 1 else '') + '?' + urlencode({'s':query}, 'utf-8') + '&' + SORT + order
         data_raw = _session.get(data_url, headers=HEADERS)
-        html = BeautifulSoup(data_raw.text, 'html.parser')
-        posts = html.find_all('div', {'id' : re.compile('post-[0-9]*')})
+        data_text = data_raw.text.replace('</time></a>','</time>') #bullshit
+        html = BeautifulSoup(data_text, 'html.parser')
+        posts = html.find_all('div', {'id' : re.compile('post-[0-9]*')}, True)
 
         if page > 1:
             less = get_url(action='search', query=query, order=order, page=page-1)
         else:
             less = None
 
-        nextpostslink = html.find_all('a', {'class' : 'nextpostslink', 'rel':'next'})
+        nextpostslink = html.find_all('a', {'class' : 'nextpostslink', 'rel':'next'}, True)
 
         if len(nextpostslink) > 0:
             more = get_url(action='search', query=query, order=order, page=page+1)
@@ -177,7 +186,7 @@ def list_search(query, order, page = 1):
     xbmcplugin.endOfDirectory(_handle, updateListing=page > 1)
 
 def manual_resolve(html):
-    video = html.find_all('div', {'id' : 'video'})
+    video = html.find_all('div', {'id' : 'video'}, True)
     if len(video) != 1:
         return ''
     video = video[0]
@@ -229,34 +238,45 @@ def play(href):
     data_raw = _session.get(href, headers=HEADERS)
     html = BeautifulSoup(data_raw.text, 'html.parser')
 
+    #let's manual resolve first
+    manual_url = manual_resolve(html)
+
+    #now iframes
     iframes = html.select('iframe')
 
-    count = len(iframes)
+    #now joint them
+    if '' != manual_url:
+        urls = [manual_url] + ['%s' % (iframe['src']) for iframe in iframes]
+    else :
+        urls = ['%s' % (iframe['src']) for iframe in iframes]
+
+    count = len(urls)
 
     url = ''
 
     if count > 1:
         # choose dialog
         dialog = xbmcgui.Dialog()
-        opts = ['%s' % (urlparse(iframe['src']).netloc) for iframe in iframes]
-        index = dialog.select('choose', opts) #TODO
+        opts = ['%s' % (urlparse(iurl).netloc) for iurl in urls]
+        index = dialog.select(_addon.getLocalizedString(30007), opts) #TODO
         if index != -1:
-            url = iframes[index]['src']
+            url = urls[index]
+        else:
+            xbmcplugin.setResolvedUrl(_handle, False, xbmcgui.ListItem())
+            return
     elif count == 1:
         #direct play
-        url = iframes[0]['src']
+        url = urls[0]
 
     if url != '':
         url = resolve(url)
-
-    if url == '' or url == False:
-        #yet another try
-        url = manual_resolve(html)
-        if url != '':
-            url = resolve(url)
-
-    if url == '' or url == False:
+    else:
         xbmcgui.Dialog().ok(_addon.getAddonInfo('name'), _addon.getLocalizedString(30005))
+        xbmcplugin.setResolvedUrl(_handle, False, xbmcgui.ListItem())
+        return
+
+    if url == '' or url == False:
+        xbmcgui.Dialog().ok(_addon.getAddonInfo('name'), _addon.getLocalizedString(30006))
         xbmcplugin.setResolvedUrl(_handle, False, xbmcgui.ListItem())
         return
 
