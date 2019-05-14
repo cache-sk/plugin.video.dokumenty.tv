@@ -94,7 +94,7 @@ def list_posts(posts, less, more):
         is_folder = True
         xbmcplugin.addDirectoryItem(_handle, link, list_item, is_folder)
 
-    resuffix = re.compile(u'.*(?P<suffix> ((-|–|- |– )([a-zA-Z\u00C0-\u017F]+\s?/?\s?)?)(dokumen|dokument|film|serie)(\s?/\s?(dokumen|dokument|film|serie))?( \([A-Za-z]+ Dabing\))?\s*)$')
+    resuffix = re.compile(u'.*(?P<suffix>(( | -| –| - | – )([a-zA-Z\u00C0-\u017F]+\s?/?\s?)?)(dokumen|dokument|film|serie)(\s?/\s?(dokumen|dokument|film|serie))?( \([A-Za-z]+ Dabing\))?\s*)$')
     for post in posts:
         #TODO - catch non existing elements, or multiple elements?
         img = post.select('img')[0]['src']
