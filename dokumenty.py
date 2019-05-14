@@ -94,6 +94,7 @@ def list_posts(posts, less, more):
         is_folder = True
         xbmcplugin.addDirectoryItem(_handle, link, list_item, is_folder)
 
+    resuffix = re.compile(u'.*(?P<suffix> ((-|–|- |– )([a-zA-Z\u00C0-\u017F]+\s?/?\s?)?)(dokumen|dokument|film|serie)(\s?/\s?(dokumen|dokument|film|serie))?( \([A-Za-z]+ Dabing\))?\s*)$')
     for post in posts:
         #TODO - catch non existing elements, or multiple elements?
         img = post.select('img')[0]['src']
@@ -101,6 +102,13 @@ def list_posts(posts, less, more):
         title_link = title_block.select('a')[0]
         href = title_link['href']
         name = title_link.string
+        
+        #strip suffixes
+        match = resuffix.search(name)
+        if (match):
+            suffix = match.group('suffix')
+            name = name[None:-len(suffix)]
+
         summary = post.find_all('p', {'class' : 'entry-summary'}, True)
         if len(summary) > 0:
             summary = summary[0].string.strip()
