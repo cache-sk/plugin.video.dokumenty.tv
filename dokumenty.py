@@ -255,12 +255,18 @@ def play(href):
 
     #now iframes
     iframes = html.select('iframe')
+    titles = []
 
-    #now joint them
+    #now join them
     if '' != manual_url:
         urls = [manual_url] + ['%s' % (iframe['src']) for iframe in iframes]
-    else :
+        titles = [iframe.parent.find_previous_sibling('p').text for iframe in iframes]
+    else:
         urls = ['%s' % (iframe['src']) for iframe in iframes]
+        try:
+            titles = [iframe.parent.find_previous_sibling('p').text for iframe in iframes]
+        except AttributeError:
+            pass
 
     count = len(urls)
 
@@ -269,7 +275,11 @@ def play(href):
     if count > 1:
         # choose dialog
         dialog = xbmcgui.Dialog()
-        opts = ['%s' % (urlparse(iurl).netloc) for iurl in urls]
+        if titles:
+            opts = ['%s (%s)' % (titles[indx], urlparse(iurl).netloc) for indx, iurl in enumerate(urls)]
+        else:
+            opts = ['%s' % (urlparse(iurl).netloc) for iurl in urls]
+
         index = dialog.select(_addon.getLocalizedString(30007), opts) #TODO
         if index != -1:
             url = urls[index]
