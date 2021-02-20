@@ -5,8 +5,6 @@
 # License: AGPL v.3 https://www.gnu.org/licenses/agpl-3.0.html
 
 import sys
-from urllib import urlencode
-from urlparse import parse_qsl, urlparse
 import xbmc
 import xbmcgui
 import xbmcplugin
@@ -18,12 +16,23 @@ import traceback
 import re
 from bs4 import BeautifulSoup
 
+try:
+    from urllib import urlencode
+    from urlparse import parse_qsl, urlparse
+except ImportError:
+    from urllib.parse import urlencode
+    from urllib.parse import parse_qsl, urlparse
+
 _url = sys.argv[0]
 _handle = int(sys.argv[1])
 
 _addon = xbmcaddon.Addon()
 _session = requests.Session()
-_profile = xbmc.translatePath( _addon.getAddonInfo('profile')).decode('utf-8')
+_profile = xbmc.translatePath( _addon.getAddonInfo('profile'))
+try:
+    _profile = _profile.decode('utf-8')
+except:
+    pass
 
 BASE = 'http://dokumenty.tv/'
 SORT = 'orderby='
@@ -230,20 +239,20 @@ def manual_resolve(html):
     return ''
 
 def resolve(url):
-    xbmc.log('Resolving: '+url,level=xbmc.LOGNOTICE)
+    xbmc.log('Resolving: '+url,level=xbmc.LOGINFO)
     resolved = False
     try:
         resolved = resolveurl.resolve(url)
     except Exception as e:
-        xbmc.log(str(e),level=xbmc.LOGNOTICE)
+        xbmc.log(str(e),level=xbmc.LOGINFO)
     
     if resolved == False:
         try:
             resolved = urlresolver.resolve(url)
         except Exception as e:
-            xbmc.log(str(e),level=xbmc.LOGNOTICE)
+            xbmc.log(str(e),level=xbmc.LOGINFO)
     
-    xbmc.log('Resolved: '+str(resolved),level=xbmc.LOGNOTICE)
+    xbmc.log('Resolved: '+str(resolved),level=xbmc.LOGINFO)
     return resolved
 
 def play(href):
@@ -296,7 +305,7 @@ def play(href):
         listitem = xbmcgui.ListItem(path=url)
         xbmcplugin.setResolvedUrl(_handle, True, listitem)
     except Exception as e:
-        xbmc.log(str(e),level=xbmc.LOGNOTICE)
+        xbmc.log(str(e),level=xbmc.LOGINFO)
         traceback.print_exc()
         xbmcgui.Dialog().ok(_addon.getAddonInfo('name'), str(e))
     
