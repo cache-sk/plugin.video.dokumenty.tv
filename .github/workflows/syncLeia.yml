@@ -9,6 +9,7 @@ jobs:
   sync:
     runs-on: ubuntu-18.04
     steps:
+      - uses: AutoModality/action-clean@v1
       - uses: actions/checkout@v2
         with:
           ref: leia
