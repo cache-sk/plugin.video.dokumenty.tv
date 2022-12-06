@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-        if: git ls-remote --heads origin unid && echo true
         with:
           ref: uni
           fetch-depth: 0
