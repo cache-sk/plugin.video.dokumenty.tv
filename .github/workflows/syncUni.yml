@@ -10,11 +10,13 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+        if: git ls-remote --heads origin unid && echo true
         with:
           ref: uni
           fetch-depth: 0
       - run: git config user.name github-actions
       - run: git config user.email github-actions@github.com
+      - run: git config pull.ff only
       - run: git pull origin master
       - run: sed -i 's/import addon="xbmc.python" version="3.0.0" \//!--import addon="xbmc.python" version="3.0.0" \/--/' addon.xml
       - run: git add -A
