@@ -9,14 +9,13 @@ jobs:
   sync:
     runs-on: ubuntu-18.04
     steps:
-      - run: ls -la
       - uses: actions/checkout@v2
         with:
           ref: uni
           fetch-depth: 0
       - run: git config user.name github-actions
       - run: git config user.email github-actions@github.com
-      - run: git pull origin master
+      - run: git pull origin master --verbose --no-ff
       - run: sed -i 's/import addon="xbmc.python" version="3.0.0" \//!--import addon="xbmc.python" version="3.0.0" \/--/' addon.xml
       - run: git add -A
       - run: git diff-index --quiet HEAD || git commit -m "addon.xml auto update for Uni"
