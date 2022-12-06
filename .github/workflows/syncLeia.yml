@@ -9,13 +9,13 @@ jobs:
   sync:
     runs-on: ubuntu-18.04
     steps:
+      - uses: AutoModality/action-clean@v1
       - uses: actions/checkout@v2
         with:
           ref: leia
           fetch-depth: 0
       - run: git config user.name github-actions
       - run: git config user.email github-actions@github.com
-      - run: git config pull.ff only
       - run: git pull origin master
       - run: sed -i 's/import addon="xbmc.python" version="3.0.0"/import addon="xbmc.python" version="2.19.0"/' addon.xml
       - run: git add -A
