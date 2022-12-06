@@ -9,7 +9,7 @@ jobs:
   sync:
     runs-on: ubuntu-18.04
     steps:
-      - uses: AutoModality/action-clean@v1
+      - run: ls -la
       - uses: actions/checkout@v2
         with:
           ref: uni
