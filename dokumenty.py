@@ -45,16 +45,16 @@ HEADERS={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/53
 
 CATEGORIES = [
     {'cat':'','msg':_addon.getLocalizedString(30201)},
-    {'cat':'category/historie/','msg':_addon.getLocalizedString(30202)},
+    {'cat':'category/historie-retro/','msg':_addon.getLocalizedString(30202)},
     {'cat':'category/katastroficke/','msg':_addon.getLocalizedString(30203)},
     {'cat':'category/konspirace/','msg':_addon.getLocalizedString(30204)},
     {'cat':'category/krimi/','msg':_addon.getLocalizedString(30205)},
     {'cat':'category/mysleni/','msg':_addon.getLocalizedString(30206)},
-    {'cat':'category/prirodovedny-dokument/','msg':_addon.getLocalizedString(30207)},
-    {'cat':'category/technika/','msg':_addon.getLocalizedString(30208)},
-    {'cat':'category/vesmir/','msg':_addon.getLocalizedString(30209)},
+    {'cat':'category/priroda/','msg':_addon.getLocalizedString(30207)},
+    {'cat':'category/technika-veda/','msg':_addon.getLocalizedString(30208)},
+    {'cat':'category/vesmir-ufo/','msg':_addon.getLocalizedString(30209)},
     {'cat':'category/zahady/','msg':_addon.getLocalizedString(30210)},
-    {'cat':'category/zivotni-styl/','msg':_addon.getLocalizedString(30211)}
+    {'cat':'category/zivotni-styl-sport/','msg':_addon.getLocalizedString(30211)}
 ]
 
 ORDERS = [
