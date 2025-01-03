@@ -44,12 +44,14 @@ SORT = 'orderby='
 HEADERS={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36', 'Referer': BASE}
 
 CATEGORIES = [
+
     {'cat':'','msg':_addon.getLocalizedString(30201)},
+    {'cat':'category/geografie-a-cestovani/','msg':_addon.getLocalizedString(30212)},
     {'cat':'category/historie-retro/','msg':_addon.getLocalizedString(30202)},
     {'cat':'category/katastroficke/','msg':_addon.getLocalizedString(30203)},
     {'cat':'category/konspirace/','msg':_addon.getLocalizedString(30204)},
     {'cat':'category/krimi/','msg':_addon.getLocalizedString(30205)},
-    {'cat':'category/mysleni/','msg':_addon.getLocalizedString(30206)},
+    {'cat':'category/myseni/','msg':_addon.getLocalizedString(30206)},
     {'cat':'category/priroda/','msg':_addon.getLocalizedString(30207)},
     {'cat':'category/technika-veda/','msg':_addon.getLocalizedString(30208)},
     {'cat':'category/vesmir-ufo/','msg':_addon.getLocalizedString(30209)},

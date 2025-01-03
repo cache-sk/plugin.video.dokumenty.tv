@@ -88,6 +88,10 @@ msgctxt "#30211"
 msgid "Lifestyle"
 msgstr "Životný štýl"
 
+msgctxt "#30212"
+msgid "Geographic"
+msgstr "Cestovateľské"
+
 msgctxt "#30300"
 msgid "Order"
 msgstr "Poradie"
