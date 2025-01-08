@@ -88,6 +88,10 @@ msgctxt "#30211"
 msgid "Lifestyle"
 msgstr "Životní styl"
 
+msgctxt "#30212"
+msgid "Geographic"
+msgstr "Geografie a cestovani"
+
 msgctxt "#30300"
 msgid "Order"
 msgstr "Pořadí"
@@ -115,4 +119,6 @@ msgstr "Podle komentářů"
 msgctxt "#30306"
 msgid "Random"
 msgstr "Náhodně"
+
+
 

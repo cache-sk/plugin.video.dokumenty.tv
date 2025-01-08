@@ -88,6 +88,10 @@ msgctxt "#30211"
 msgid "Lifestyle"
 msgstr ""
 
+msgctxt "#30212"
+msgid "Geographic"
+msgstr ""
+
 msgctxt "#30300"
 msgid "Order"
 msgstr ""
